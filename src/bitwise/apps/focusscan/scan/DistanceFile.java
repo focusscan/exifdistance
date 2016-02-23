@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 
 public class DistanceFile {
 	private static final String SCAN_DISTANCE = "scanDistance";
+	private static final String FOCAL_LENGTH = "focalLength";
 	private static final String PROPERTIES = "properties";
 	private static final String SCAN_PATH = "scanPath";
 	private static final String DATA = "data";
@@ -31,6 +32,7 @@ public class DistanceFile {
 	private static final String DISTANCE_METERS = "distanceInMeters";
 	
 	private String scanPath = "";
+	private float focalLength = 0.0f;
 	
 	private List<DistanceFileDatum> data = new ArrayList<>();
 	
@@ -62,6 +64,10 @@ public class DistanceFile {
 				if (Node.ELEMENT_NODE == prop.getNodeType()) {
 					if (prop.getNodeName().equalsIgnoreCase(SCAN_PATH)) {
 						scanPath = prop.getTextContent();
+					}
+					
+					if (prop.getNodeName().equalsIgnoreCase(FOCAL_LENGTH)) {
+						focalLength = Float.parseFloat(prop.getTextContent());
 					}
 				}
 			}
@@ -140,6 +146,12 @@ public class DistanceFile {
 				scanPathE.appendChild(doc.createTextNode(scanPath));
 				edgeScanPropertiesE.appendChild(scanPathE);
 			}
+			
+			{
+				Element focalLengthE = doc.createElement(FOCAL_LENGTH);
+				focalLengthE.appendChild(doc.createTextNode(Float.toString(focalLength)));
+				edgeScanPropertiesE.appendChild(focalLengthE);
+			}
 		}
 		
 		{
@@ -172,6 +184,14 @@ public class DistanceFile {
 	
 	public void setScanPath(String in) {
 		scanPath = in;
+	}
+	
+	public float get35MMFocalLength() {
+		return focalLength;
+	}
+	
+	public void set35MMFocalLength(Float in) {
+		focalLength = in;
 	}
 	
 	public List<DistanceFileDatum> getData() {
