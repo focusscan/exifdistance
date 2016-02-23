@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -19,9 +18,8 @@ import bitwise.apps.focusscan.scan.ScanFileDatum;
 public class ExifDistance {
 
 	public static void main(String[] args) {
-		if (args.length < 1) {
-			System.out.println("Usage: ExifDistance scan-root-directory OR");
-			System.out.println("       ExifDistance distance-file.xml");
+		if (args.length < 2) {
+			System.out.println("Usage: ExifDistance scan-root-directory output-file");
 		}
 		
 		Path scanPath = Paths.get(args[0]);
@@ -36,10 +34,10 @@ public class ExifDistance {
 		if (!Files.isReadable(scanManifest)) {
 			System.out.format("Error: scan file `%s` is not readable.\n", scanManifest);
 		}
-		readScanManifest(scanManifest, scanPath);
+		readScanManifest(scanManifest, scanPath, Paths.get(args[1]));
 	}
 	
-	public static void readScanManifest(Path scanManifest, Path scanPath) {
+	public static void readScanManifest(Path scanManifest, Path scanPath, Path output) {
 		try {
 			ScanFile scanFile = new ScanFile(scanManifest);
 			System.out.format("Images in scan: %d\n", scanFile.getData().size());
@@ -58,7 +56,7 @@ public class ExifDistance {
 				distanceFile.getData().add(distFileDatum);
 			}
 			
-			distanceFile.saveToFile(Paths.get("distanceFile.xml"));
+			distanceFile.saveToFile(output);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
