@@ -20,6 +20,7 @@ public class ExifDistance {
 	public static void main(String[] args) {
 		if (args.length < 2) {
 			System.out.println("Usage: ExifDistance scan-root-directory output-file");
+			return;
 		}
 		
 		Path scanPath = Paths.get(args[0]);
