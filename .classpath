@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/xmpcore-5.1.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/drmorr/invlim/proj/camera/distance/lib/metadata-extractor-2.8.2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/metadata-extractor-2.8.2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
