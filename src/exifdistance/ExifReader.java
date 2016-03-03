@@ -42,7 +42,7 @@ public class ExifReader {
             if (dir2 != null) {     
                 NikonType2MakernoteDescriptor desc = new NikonType2MakernoteDescriptor(dir2);
                 String fd = desc.getLensFocusDistance();
-            	return new ArrayList<Float>(Arrays.asList(Float.valueOf(fd.substring(0, fd.length() - 2))));
+            	return new ArrayList<Float>(Arrays.asList(Float.valueOf(fd.substring(0, fd.length() - 1))));
             }
           
         } catch (ImageProcessingException | IOException | MetadataException e) {
